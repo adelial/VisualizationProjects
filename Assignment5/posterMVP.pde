@@ -23,7 +23,7 @@ class PosterMVP {
     text2 = "2018 NHL Finals MVP";
   }
   
-  //Posterize Function
+  //Posterize Function (280, 442, )
   void display(PImage img){
     img.loadPixels();
     for (int i = 0; i < img.pixels.length; i++){
@@ -32,7 +32,7 @@ class PosterMVP {
       if (rgbTot <= 280){
         img.pixels[i] = color(washBlue);
       }
-      else if (rgbTot <= 442){
+      else if (rgbTot <= 402){
         img.pixels[i] = color(washRed);
       }
       else {
@@ -42,6 +42,7 @@ class PosterMVP {
     //return(img);
     img.updatePixels();
     image(img, 0, 0);
+    
   }
   
 }
