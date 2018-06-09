@@ -1,5 +1,5 @@
 // MSDS 6390 - Visualization
-// Assignment 4   - Animation 
+// Assignment 5 - Pixel Updates 
 // Names: George Sturrock and Alma Lopez
 //   
 
@@ -9,13 +9,15 @@
 //scoreBoard gameScore;
 puck hpuck;
 hockeystick stick;
-IntroText intro;  //GS
+TextSummary gameSumm;
+PosterMVP poster;
+Stats seriesStats;
 
 int ind=0; 
 int score1=0, score2=0;
 long lastTime;
 int periodNum =0; 
-PImage header; 
+PImage header, ao; 
 // Games scores
 int[][] arrG1 = { {2,2},{1,1},{1,3} },  //Game 1 per periods
         arrG2 = { {1,1},{2,1},{0,0} },  //Game 2 per periods
@@ -25,11 +27,6 @@ int[][] arrG1 = { {2,2},{1,1},{1,3} },  //Game 1 per periods
     //    arrG6 = { {22,39},{29,22},{33,16},{31,9} },  //Game 6 per periods
      //   arrG7 = { {19,24},{24,30},{33,15},{25,23} };  //Game 7 per periods
 
-
-
-//Declare and Construct Class
-//TextSummary gameSumm = new TextSummary();
-TextSummary gameSumm;
 
 int game=0;
 
@@ -41,8 +38,12 @@ void setup(){
  // gameScore = new scoreBoard();
   hpuck = new puck();
   stick = new hockeystick();
-
   gameSumm = new TextSummary();
+  poster = new PosterMVP();
+  seriesStats = new Stats();
+  
+  //Load Alex Ovechkin Image
+  ao = loadImage("ovechkinHeadShot.png");
   
   header = loadImage("headerNHL.png");  //for background
   ind = 0;
@@ -52,31 +53,38 @@ void setup(){
 void draw(){
  background(#2D5F90);
   image(header,width/2-header.width/2,5);
-  
+  poster.display(ao);
+  seriesStats.pie();
+  seriesStats.bar();
   hockeyGoal(width/4, height/5*3);
   hpuck.drawpuck();
   stick.drawstick(width/4+250,height/5*3+100);
-  if (millis() < 2400){
+  if (millis() < 10000){
     game = 1;
     hpuck.shoot(350,600,2);
+    gameSumm.display(game, -600, -600);
    //teamLogo();
   }
   else if (millis() < 20000){
     game = 2;
+    gameSumm.display(game, -600, -600);
    // hpuck.shoot(350,600);
   }
   else if (millis() < 30000){
     game = 3;
+    gameSumm.display(game, -600, -600);
      //hpuck.shoot(350,600);
   }    
   else if (millis() < 40000){
     game = 4;
+    gameSumm.display(game, -600, -600);
      //hpuck.shoot(350,600);
   }
   else {
     game = 5;
+    gameSumm.display(game, -600, -600);
    // hpuck.shoot(350,600);
-  }  
+  }
 }
  
  // hpuck.drawPuck(1, 30);

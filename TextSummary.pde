@@ -11,7 +11,7 @@ class TextSummary{
     textSize(18);
     tSpeed = 2;
     y=0;
-    yStop = 220;
+    yStop = 150;
     g2 = false;
     g3 = false;
     g4 = false;
