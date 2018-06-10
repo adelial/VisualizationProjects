@@ -17,7 +17,9 @@ int ind=0;
 int score1=0, score2=0;
 long lastTime;
 int periodNum =0; 
-PImage header, ao; 
+
+PImage header, ao, cup, team; 
+
 // Games scores
 int[][] arrG1 = { {2,2},{1,1},{1,3} },  //Game 1 per periods
         arrG2 = { {1,1},{2,1},{0,0} },  //Game 2 per periods
@@ -42,16 +44,19 @@ void setup(){
   poster = new PosterMVP();
   seriesStats = new Stats();
   
-  //Load Alex Ovechkin Image
+  //Load Images
   ao = loadImage("ovechkinHeadShot.png");
-  
+  cup = loadImage("Stanley_Cup.png");
+  team = loadImage("blend2sm.jpg");
   header = loadImage("headerNHL.png");  //for background
   ind = 0;
      
 }
 
 void draw(){
- background(#2D5F90);
+  if (millis() < 50000){
+    background(#2D5F90);
+  }
   image(header,width/2-header.width/2,5);
   poster.display(ao);
   seriesStats.pie();
@@ -80,10 +85,14 @@ void draw(){
     gameSumm.display(game, -600, -600);
      //hpuck.shoot(350,600);
   }
-  else {
+  else if (millis() < 50000){
     game = 5;
     gameSumm.display(game, -600, -600);
    // hpuck.shoot(350,600);
+  }
+  else {
+   background(team);
+   blend(cup, 160, 0, cup.width, cup.height, 0, 0, team.width, team.height, SCREEN);
   }
 }
  
