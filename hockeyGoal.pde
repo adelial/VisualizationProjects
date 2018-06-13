@@ -1,13 +1,15 @@
-void hockeyGoal(int posx, int posy) {
-  
+// hockeyGoal function is used to draw the hochey goal and net in the position requested as arguments
+// it calls the puck shoot method to move it
+void hockeyGoal(int posx, int posy) {  
   stroke(255,0,0);
   strokeWeight(8);
   noFill();
   pushMatrix();
-    translate(posx, posy,-10);
+    translate(posx, posy);
     rect(0,0,300, 150, 10);
-    fill(#7030A5);
+    fill(#2D5F90);
     arc(150,146,300,50,radians(180), PI*2);
+    
     //net
     stroke(#E8E1ED);
     strokeWeight(2);
@@ -44,38 +46,7 @@ void hockeyGoal(int posx, int posy) {
     line(275,125,297,105);
     
     fill(#6AB0F5);
-    arc(150,148,300,75,radians(0), PI);
-  popMatrix();
-  
-}
-
-
-void basket(){
-  int cwidth = width/3;
-  int cheight = height/3;
-  
-  // basket
-  stroke(255,0,0);
-  strokeWeight(4);
-  ellipse(280, 90, 85, 20);
-  stroke(255);
-  strokeWeight(3);
-  ellipse(280, 110, 75, 10);
-  ellipse(280, 130, 65, 10);
-  line(238, 90, 248, 130);
-  line(322, 90, 312, 130);
-  line(265, 100, 265, 135);
-  line(300, 100, 300, 135);
-  strokeWeight(10);
-  stroke(64,62,124);
-  line(325, 10, 325, 120);
-  noStroke();
-  fill(64,62,124);
-  rect(330,90,60, 20);
-  fill(0);
-  pushMatrix();
-    translate(375,105);
-    rotate(-PI/4);
-    rect(0,0,20,190);
-  popMatrix();  
+    arc(150,148,300,75,radians(0), PI);  
+    hpuck.shoot();
+  popMatrix(); 
 }

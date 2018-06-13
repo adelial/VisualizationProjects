@@ -1,4 +1,4 @@
-//class puck
+//class puck 
 class puck{  //Definition
   color bCollor;
   float rad;
@@ -6,17 +6,15 @@ class puck{  //Definition
   PVector velocity;  // Velocity for the shoot
   PVector acceleration;  // Acceleration of the shoot 
   
-  //width/2, height/5*3
-  
   puck() {  // constructor
-    location = new PVector(480, 880,2);   // initial location
-    velocity = new PVector(-1,-2,1);
-    acceleration = new PVector(5,7.5,1);
+    location = new PVector(480, 880);   // initial location
+    velocity = new PVector(-10,-50);
+    acceleration = new PVector(30,30);
     bCollor = color(56,62,65);  // puck color
     rad = 15;  //puck radiuos    
   } // puck
   
-  // method to display ball
+  // method to draw hockey puck
   void drawpuck() {
     fill(bCollor);
     noStroke();
@@ -31,36 +29,36 @@ class puck{  //Definition
     ellipse(location.x,location.y,2*rad,rad);    
     line(location.x-rad,location.y,location.x-rad,location.y+rad/2);
     line(location.x+rad,location.y,location.x+rad,location.y+rad/2); 
-  }  // display
+  }  // drawpuck
   
      
-     
-     
-  // method needed to make the shoots
-  void shoot(int posx, int posy, int num){
-    PVector scoreb = new PVector(random(360,650),random(610,690),10); // score basket location 
-    PVector initial = new PVector(450,885,10);  // floor location
-
-   // if ((location.x > 350) && (location.x < 600)) {   // Identify the origin and shoot direct to net
-   for (int i=0; i<num; i++) {
+ // method needed to make the shoots
+  void shoot(){
+    PVector scoreb = new PVector(random(260,280),170); // goal net location 
+    PVector floor = new PVector(275,390);  // stick location
+    
+    if ((location.x < 270) && (location.x > 20)) {   // Identify the origin and shoot direct to net
        scoreb.sub(location);
-       scoreb.setMag(9.5);
+       scoreb.setMag(5.5);
        acceleration = scoreb;
     
        velocity.add(acceleration);
        location.add(velocity);
-       velocity.limit(0.1);   // random velocity
-  
-       initial.sub(location);
-       initial.setMag(1.5);
-       acceleration = initial;
-       velocity.add(acceleration);
-       location.add(velocity);
-      //  velocity.limit(random(1,2));
+       velocity.limit(random(1,15));   // random velocity
     }
-    // When the ball is in the floor another initial random location is set
-    if ((location.x>480) && (location.y<800)) {
-     // location.set(random(380,600),880);
+    else{   // back to the stick
+        floor.sub(location);
+        floor.setMag(1.5);
+        acceleration = floor;
+        velocity.add(acceleration);
+        location.add(velocity);
+        velocity.limit(random(1,3));
+    }
+    // When the puck is in the stick another initial random location is set
+    if ((location.x>270) && (location.y>385)) {
+      stick.hit(100, 75, 30, 20, 10);   //hit puck 
+      location.set(random(50,130),random(180,300));
     } 
   } // shoot
-} // class ball
+     
+} // class puck

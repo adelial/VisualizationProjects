@@ -28,7 +28,7 @@ float barH = (height*0.95 - height*0.73);
     //Save Percentage
     stroke(255);
     //bar chart frame
-    println("Bar Chart Height:", (height*0.73 - height*0.95));
+  //  println("Bar Chart Height:", (height*0.73 - height*0.95));
     line(width*0.84, height*0.47, width*0.84, height*0.62);
     line(width*0.84, height*0.62, width*0.96, height*0.62);
     fill(255);
@@ -43,6 +43,7 @@ float barH = (height*0.95 - height*0.73);
 
   void pie(){
     //Total Goals
+    fill(255);
     text("Total Goals", width*0.9, height*0.05);
     lastAngle = 0; //<>//
     for (int i = 0; i < angles1.length; i++){ //<>//

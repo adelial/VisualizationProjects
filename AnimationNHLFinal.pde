@@ -1,12 +1,10 @@
 // MSDS 6390 - Visualization
-// Assignment 5 - Pixel Updates 
+// Assignment 5 - Pixel Updates Images
 // Names: George Sturrock and Alma Lopez
 //   
 
-//int[][] arrG1, arrG2, arrG3, arrG4, arrG5, arrG6, arrG7;
-//Declare Classes
-
-//scoreBoard gameScore;
+// Classes definition
+scoreBoard gameScore;
 puck hpuck;
 hockeystick stick;
 TextSummary gameSumm;
@@ -18,26 +16,18 @@ int score1=0, score2=0;
 long lastTime;
 int periodNum =0; 
 
-PImage header, ao, cup, team; 
+PImage header, ao, cup, team, logo; 
 
-// Games scores
-int[][] arrG1 = { {2,2},{1,1},{1,3} },  //Game 1 per periods
-        arrG2 = { {1,1},{2,1},{0,0} },  //Game 2 per periods
-        arrG3 = { {0,0},{0,2},{1,1} },  //Game 3 per periods
-        arrG4 = { {0,3},{0,1},{2,2} },  //Game 4 per periods
-        arrG5 = { {0,0},{2,3},{2,0} };  //Game 5 per periods
-    //    arrG6 = { {22,39},{29,22},{33,16},{31,9} },  //Game 6 per periods
-     //   arrG7 = { {19,24},{24,30},{33,15},{25,23} };  //Game 7 per periods
-
-
+// Games scores 
+int[][] arrGames = { {4,6},{3,2},{3,1}, {6,2}, {4,3} };  // Game series final scores
+        
 int game=0;
 
 void setup(){
   background(0);
-  size(1400,1000, P3D);
-  //size(1400,1000);
-  //size(600, 400);
- // gameScore = new scoreBoard();
+  size(1400,1000);
+  // Initialziation for objects/classes
+  gameScore = new scoreBoard();
   hpuck = new puck();
   stick = new hockeystick();
   gameSumm = new TextSummary();
@@ -48,54 +38,55 @@ void setup(){
   ao = loadImage("ovechkinHeadShot.png");
   cup = loadImage("Stanley_Cup.png");
   team = loadImage("blend2sm.jpg");
-  header = loadImage("headerNHL.png");  //for background
+  header = loadImage("headerNHL.png"); 
   ind = 0;
      
 }
 
 void draw(){
-  if (millis() < 50000){
+  if (millis() < 50000){  // For the first screen with scores and animation
     background(#2D5F90);
   }
   image(header,width/2-header.width/2,5);
   poster.display(ao);
   seriesStats.pie();
   seriesStats.bar();
-  hockeyGoal(width/4, height/5*3);
+  hockeyGoal(50, 130); 
   hpuck.drawpuck();
-  stick.drawstick(width/4+250,height/5*3+100);
+  gameScore.display(500,500);
+  stick.drawstick();
+    
+  // changes in the screen based on the games results
   if (millis() < 10000){
     game = 1;
-    hpuck.shoot(350,600,2);
-    gameSumm.display(game, -600, -600);
-   //teamLogo();
+    gameSumm.display(game, 40, 60);  
+    gameScore.refresh(arrGames,game);
   }
   else if (millis() < 20000){
     game = 2;
-    gameSumm.display(game, -600, -600);
-   // hpuck.shoot(350,600);
+    gameSumm.display(game, 40, 60);
+    gameScore.refresh(arrGames,game);
   }
   else if (millis() < 30000){
     game = 3;
-    gameSumm.display(game, -600, -600);
-     //hpuck.shoot(350,600);
+    gameSumm.display(game, 40, 60);
+    gameScore.refresh(arrGames,game);
   }    
   else if (millis() < 40000){
     game = 4;
-    gameSumm.display(game, -600, -600);
-     //hpuck.shoot(350,600);
+    gameSumm.display(game, 40, 60);
+    gameScore.refresh(arrGames,game);
   }
   else if (millis() < 50000){
     game = 5;
-    gameSumm.display(game, -600, -600);
-   // hpuck.shoot(350,600);
+    gameSumm.display(game, 40, 60);
+    gameScore.refresh(arrGames,game);   
   }
-  else {
-   background(team);
+  else
+  {
+   background(team);  // Winner team with Stanley Cup
    blend(cup, 160, 0, cup.width, cup.height, 0, 0, team.width, team.height, SCREEN);
   }
 }
- 
- // hpuck.drawPuck(1, 30);
- // gameScore.display(60,165);
+
    
