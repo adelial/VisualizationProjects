@@ -44,6 +44,7 @@ class PosterMVP {
     }
     //return(img);
     img.updatePixels();
+    fill(255);
     text(text1, width*0.83, height*0.67);
     text(text2, width*0.83, height*0.69);
     image(img, width*0.7, height*0.7);
